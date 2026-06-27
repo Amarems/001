@@ -1,0 +1,64 @@
+{
+  "as_of": "2026-06-27T08:00:00-04:00",
+  "status": "latest-matchday-ready",
+  "scope": "2026-06-26 completed World Cup matches used to recalibrate the 2026-06-27 score board",
+  "method": "Pre-match Dixon-Coles plus 50,000-run Monte Carlo defaults; shrinkage-limited online calibration",
+  "finalized_matches": [
+    {
+      "home": "Norway",
+      "away": "France",
+      "actual_score": "1:4",
+      "lesson": "Strong-side upside was underweighted. Keep route incentive and attacking ceiling for elite teams."
+    },
+    {
+      "home": "Senegal",
+      "away": "Iraq",
+      "actual_score": "5:0",
+      "lesson": "Must-win third-place matches can become blowouts after the first goal."
+    },
+    {
+      "home": "Egypt",
+      "away": "Iran",
+      "actual_score": "1:1",
+      "lesson": "Cautious qualification states preserved the draw/low-score cluster."
+    },
+    {
+      "home": "New Zealand",
+      "away": "Belgium",
+      "actual_score": "1:5",
+      "lesson": "Elite mismatch plus must-win pressure needs a fatter high-score tail."
+    },
+    {
+      "home": "Cape Verde",
+      "away": "Saudi Arabia",
+      "actual_score": "0:0",
+      "lesson": "Mutual risk and qualification pressure can suppress tempo late."
+    },
+    {
+      "home": "Uruguay",
+      "away": "Spain",
+      "actual_score": "0:1",
+      "lesson": "Top teams that only need control may win without chasing margin."
+    }
+  ],
+  "online_calibration": {
+    "applied": true,
+    "goal_scale_before": 0.982,
+    "goal_scale_after": 1.018,
+    "previous_day_actual_total_goals": 18,
+    "previous_day_expected_total_goals": 20.54,
+    "direction_note": "The previous day mixed two blowouts with two controlled low-score qualification matches. Today restores aggregate goal scale slightly while preserving special reductions for teams already locked into their knockout route.",
+    "exact_score_joint_probability": 0.000000004,
+    "outcome_direction_accuracy_estimate": "3/6 direct outcome hits, with 2/6 total-goal zone hits",
+    "minimum_batch": 6
+  },
+  "today_matches": [
+    "Panama vs England",
+    "Croatia vs Ghana",
+    "Algeria vs Austria",
+    "Jordan vs Argentina",
+    "Colombia vs Portugal",
+    "DR Congo vs Uzbekistan"
+  ],
+  "caveat": "This is a lightweight research calibration file for the local GOALMIND prototype, not a betting recommendation."
+}
