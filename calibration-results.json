@@ -1,64 +1,64 @@
 {
-  "as_of": "2026-06-27T08:00:00-04:00",
-  "status": "latest-matchday-ready",
-  "scope": "2026-06-26 completed World Cup matches used to recalibrate the 2026-06-27 score board",
-  "method": "Pre-match Dixon-Coles plus 50,000-run Monte Carlo defaults; shrinkage-limited online calibration",
+  "as_of": "2026-06-28T08:30:00-04:00",
+  "status": "knockout-matchday-ready",
+  "scope": "2026-06-27 completed World Cup group-stage matches used as a small-batch shrinkage calibration for the first knockout matchday",
+  "method": "Bivariate Poisson + Dixon-Coles low-score correction + Bayesian shrinkage + knockout stratified Monte Carlo",
   "finalized_matches": [
     {
-      "home": "Norway",
-      "away": "France",
-      "actual_score": "1:4",
-      "lesson": "Strong-side upside was underweighted. Keep route incentive and attacking ceiling for elite teams."
+      "home": "Panama",
+      "away": "England",
+      "actual_score": "0:2",
+      "lesson": "Strong favorite controlled the match without needing a blowout; handicap -1 type lines remain more robust than chasing -2."
     },
     {
-      "home": "Senegal",
-      "away": "Iraq",
-      "actual_score": "5:0",
-      "lesson": "Must-win third-place matches can become blowouts after the first goal."
-    },
-    {
-      "home": "Egypt",
-      "away": "Iran",
-      "actual_score": "1:1",
-      "lesson": "Cautious qualification states preserved the draw/low-score cluster."
-    },
-    {
-      "home": "New Zealand",
-      "away": "Belgium",
-      "actual_score": "1:5",
-      "lesson": "Elite mismatch plus must-win pressure needs a fatter high-score tail."
-    },
-    {
-      "home": "Cape Verde",
-      "away": "Saudi Arabia",
+      "home": "Colombia",
+      "away": "Portugal",
       "actual_score": "0:0",
-      "lesson": "Mutual risk and qualification pressure can suppress tempo late."
+      "lesson": "Top-place/route-management matches can collapse into low-event draws; keep 0:0 and 1:1 uplift for tense games."
     },
     {
-      "home": "Uruguay",
-      "away": "Spain",
-      "actual_score": "0:1",
-      "lesson": "Top teams that only need control may win without chasing margin."
+      "home": "Jordan",
+      "away": "Argentina",
+      "actual_score": "1:3",
+      "lesson": "Locked-in elite teams may still win comfortably, but rotation limits the extreme-score tail."
+    },
+    {
+      "home": "Algeria",
+      "away": "Austria",
+      "actual_score": "3:3",
+      "lesson": "Mutual qualification pressure can flip from cautious to chaotic after game-state shocks; keep bivariate correlation and red-card/tempo volatility."
+    },
+    {
+      "home": "DR Congo",
+      "away": "Uzbekistan",
+      "actual_score": "3:1",
+      "lesson": "Must-win third-place scenarios remain vulnerable to late open-game scoring."
     }
   ],
   "online_calibration": {
     "applied": true,
-    "goal_scale_before": 0.982,
-    "goal_scale_after": 1.018,
-    "previous_day_actual_total_goals": 18,
-    "previous_day_expected_total_goals": 20.54,
-    "direction_note": "The previous day mixed two blowouts with two controlled low-score qualification matches. Today restores aggregate goal scale slightly while preserving special reductions for teams already locked into their knockout route.",
-    "exact_score_joint_probability": 0.000000004,
-    "outcome_direction_accuracy_estimate": "3/6 direct outcome hits, with 2/6 total-goal zone hits",
-    "minimum_batch": 6
+    "goal_scale_before": 1.018,
+    "goal_scale_after": 1.004,
+    "knockout_draw_boost_after": 0.18,
+    "previous_day_direction_note": "The model handled England and Argentina directionally, but Colombia-Portugal and Algeria-Austria reinforced the need for stronger low-score and chaotic-state branches. First knockout matchday uses a slightly lower aggregate goal scale and higher 90-minute draw handling.",
+    "minimum_batch": 5,
+    "overfit_guardrail": "No single completed match is allowed to move team attack/defense priors directly; updates are limited to aggregate goal scale, low-score draw handling, and volatility branch weights."
   },
   "today_matches": [
-    "Panama vs England",
-    "Croatia vs Ghana",
-    "Algeria vs Austria",
-    "Jordan vs Argentina",
-    "Colombia vs Portugal",
-    "DR Congo vs Uzbekistan"
+    "South Africa vs Canada"
   ],
+  "source_audit": {
+    "official_schedule_basis": "Round of 32: Group A runner-up vs Group B runner-up, Los Angeles/SoFi, 2026-06-28 US local date.",
+    "project_same_source_odds_snapshot": "missing_for_today_match",
+    "available_odds_snapshots": [
+      "odds-snapshots/2026-06-25T091154+0800.json",
+      "odds-snapshots/2026-06-25T110421+0800.json",
+      "odds-snapshots/2026-06-26T111816+0800.json"
+    ],
+    "injury_feed": "not_integrated_no_complete_official_matchday_list",
+    "referee_sample": "not_integrated_missing_complete_verified_sample",
+    "coach_match_log": "not_integrated_missing_official_line-by-line log",
+    "social_score_sample": "not_integrated_no_auditable_video_sample"
+  },
   "caveat": "This is a lightweight research calibration file for the local GOALMIND prototype, not a betting recommendation."
 }
