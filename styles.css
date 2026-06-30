@@ -275,7 +275,13 @@ h1 em {
   align-items: stretch;
 }
 
-.lab-heading h2 { font-size: clamp(46px, 5.5vw, 78px); }
+.lab-heading h2 {
+  font: 900 clamp(24px, 3vw, 38px)/1.05 "Noto Sans SC", sans-serif;
+  letter-spacing: -.02em;
+  white-space: nowrap;
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
 
 .lab-panel, .result-card {
   padding: 32px;
@@ -653,6 +659,140 @@ input[type="range"]::-webkit-slider-thumb {
   line-height: 1.7;
 }
 
+.backtest-lab {
+  padding: 100px 7vw;
+  display: grid;
+  grid-template-columns: .8fr 1.2fr;
+  gap: 40px;
+  color: var(--ink);
+  background: #e3e0d6;
+}
+
+.backtest-lab .market-intro > p:last-child { color: #5f5c55; }
+
+.backtest-panel {
+  padding: 28px;
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  box-shadow: 10px 10px 0 var(--ink);
+}
+
+.backtest-controls {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  align-items: end;
+}
+
+.backtest-controls label {
+  display: grid;
+  gap: 6px;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .04em;
+}
+
+.backtest-controls input,
+.backtest-controls select {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px;
+  border: 1px solid var(--ink);
+  background: #fffdf5;
+  font: 700 13px/1 monospace;
+}
+
+.backtest-controls .predict-button {
+  min-height: 44px;
+  padding: 0 16px;
+}
+
+.backtest-status {
+  margin: 22px 0;
+  color: #5f5c55;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.backtest-metrics {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  border-top: 1px solid var(--ink);
+  border-left: 1px solid var(--ink);
+}
+
+.backtest-metric {
+  min-height: 82px;
+  padding: 12px;
+  display: grid;
+  align-content: space-between;
+  border-right: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+
+.backtest-metric span {
+  color: #77756e;
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.backtest-metric strong {
+  font: 800 18px/1 monospace;
+}
+
+.backtest-metric.positive strong,
+.backtest-table .positive { color: #b32f19; }
+.backtest-metric.negative strong,
+.backtest-table .negative { color: #596238; }
+
+.backtest-table-wrap {
+  margin-top: 20px;
+  overflow-x: auto;
+}
+
+.backtest-table {
+  width: 100%;
+  min-width: 820px;
+  border-collapse: collapse;
+  font: 700 10px/1.35 monospace;
+}
+
+.backtest-table th,
+.backtest-table td {
+  padding: 10px 8px;
+  border: 1px solid var(--ink);
+  text-align: right;
+}
+
+.backtest-table th:nth-child(1),
+.backtest-table td:nth-child(1),
+.backtest-table th:nth-child(2),
+.backtest-table td:nth-child(2),
+.backtest-table th:nth-child(3),
+.backtest-table td:nth-child(3) {
+  text-align: left;
+}
+
+.csv-details {
+  margin-top: 18px;
+  color: #5f5c55;
+  font-size: 11px;
+}
+
+.csv-details summary {
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.csv-details pre {
+  max-height: 160px;
+  overflow: auto;
+  padding: 14px;
+  color: var(--paper);
+  background: var(--ink);
+  white-space: pre;
+}
+
 dialog {
   width: min(580px, calc(100vw - 40px));
   padding: 48px;
@@ -664,6 +804,30 @@ dialog {
 dialog::backdrop { background: rgba(16,16,15,.7); }
 dialog h2 { margin-bottom: 28px; font-size: 48px; }
 dialog p:not(.eyebrow) { color: #c8c5bd; line-height: 1.8; }
+.status-dialog {
+  text-align: center;
+}
+.status-dialog h2 {
+  margin-bottom: 18px;
+  font-size: clamp(36px, 6vw, 54px);
+}
+.dialog-action {
+  min-width: 150px;
+  margin-top: 14px;
+  padding: 14px 22px;
+  color: #10100f !important;
+  -webkit-text-fill-color: #10100f;
+  background: var(--acid);
+  border: 2px solid var(--paper);
+  box-shadow: 5px 5px 0 var(--orange);
+  cursor: pointer;
+  font-weight: 900;
+  text-shadow: none;
+}
+.dialog-action:active {
+  transform: translate(2px, 2px);
+  box-shadow: 3px 3px 0 var(--orange);
+}
 .dialog-close {
   position: absolute;
   top: 15px;
@@ -689,8 +853,9 @@ footer {
   .match-grid { grid-template-columns: repeat(2, 1fr); }
   .lab { grid-template-columns: 1fr 1fr; }
   .lab-heading { grid-column: 1 / -1; }
-  .market-lab { grid-template-columns: 1fr; }
+  .market-lab, .backtest-lab { grid-template-columns: 1fr; }
   .research-status { grid-template-columns: repeat(3, 1fr); }
+  .backtest-metrics { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media (max-width: 640px) {
@@ -706,6 +871,9 @@ footer {
   .result-card { min-height: 480px; }
   .top-scores { grid-template-columns: repeat(2, 1fr); }
   .market-lab { padding: 72px 20px; }
+  .backtest-lab { padding: 72px 20px; }
+  .backtest-controls { grid-template-columns: 1fr; }
+  .backtest-metrics { grid-template-columns: 1fr 1fr; }
   .research-status { grid-template-columns: 1fr 1fr; }
   .section-heading { align-items: start; }
   .timezone { display: none; }
