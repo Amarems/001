@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Noto+Sans+SC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260630-title2" />
+  <link rel="stylesheet" href="styles.css?v=20260630-dialog-button1" />
 </head>
 <body>
   <div class="noise"></div>
@@ -48,51 +48,11 @@
     </section>
 
     <section class="lab" id="lab">
-      <div class="lab-heading">
-        <p class="eyebrow">PREDICTION LAB</p>
-        <h2>盘口 + 模型</h2>
-      </div>
-
+      <div class="lab-heading"><p class="eyebrow">PREDICTION LAB</p><h2>盘口 + 模型</h2></div>
       <div class="lab-panel">
-        <div class="selected-match">
-          <div class="team-side">
-            <span class="flag" id="homeFlag">🇧🇷</span>
-            <strong id="homeName">巴西</strong>
-          </div>
-          <div class="versus">VS</div>
-          <div class="team-side away">
-            <span class="flag" id="awayFlag">🇯🇵</span>
-            <strong id="awayName">日本</strong>
-          </div>
-        </div>
-
-        <div class="match-context">
-          <div>
-            <span id="homeRank">世界 #5</span>
-            <strong id="homeSituation">淘汰赛 · 个人能力优势明显，但中立场不额外加主场权重</strong>
-          </div>
-          <div>
-            <span id="awayRank">世界 #17</span>
-            <strong id="awaySituation">淘汰赛 · 高纪律性阵型，优先控制转换风险</strong>
-          </div>
-          <p id="pathText">巴西–日本已完赛回灌：巴西2–1日本。中立场不默认给列表第一队主场加成，赛前盘口继续保留用于校准。</p>
-          <p class="bracket-path" id="bracketText">32强淘汰赛：先模拟90分钟，若平局再触发点球大战子模拟。</p>
-        </div>
-        <div class="coach-context">
-          <div>
-            <span>主队教练组</span>
-            <strong id="homeCoach">巴西教练组</strong>
-            <small id="homeCoachRecord">待逐场复核</small>
-            <em id="homeCoachRate">未核验，暂不入模</em>
-          </div>
-          <div>
-            <span>客队教练组</span>
-            <strong id="awayCoach">森保一</strong>
-            <small id="awayCoachRecord">待逐场复核</small>
-            <em id="awayCoachRate">未核验，暂不入模</em>
-          </div>
-        </div>
-
+        <div class="selected-match"><div class="team-side"><span class="flag" id="homeFlag">🇧🇷</span><strong id="homeName">巴西</strong></div><div class="versus">VS</div><div class="team-side away"><span class="flag" id="awayFlag">🇯🇵</span><strong id="awayName">日本</strong></div></div>
+        <div class="match-context"><div><span id="homeRank">世界 #5</span><strong id="homeSituation">淘汰赛 · 个人能力优势明显，但中立场不额外加主场权重</strong></div><div><span id="awayRank">世界 #17</span><strong id="awaySituation">淘汰赛 · 高纪律性阵型，优先控制转换风险</strong></div><p id="pathText">巴西–日本已完赛回灌：巴西2–1日本。中立场不默认给列表第一队主场加成，赛前盘口继续保留用于校准。</p><p class="bracket-path" id="bracketText">32强淘汰赛：先模拟90分钟，若平局再触发点球大战子模拟。</p></div>
+        <div class="coach-context"><div><span>主队教练组</span><strong id="homeCoach">巴西教练组</strong><small id="homeCoachRecord">待逐场复核</small><em id="homeCoachRate">未核验，暂不入模</em></div><div><span>客队教练组</span><strong id="awayCoach">森保一</strong><small id="awayCoachRecord">待逐场复核</small><em id="awayCoachRate">未核验，暂不入模</em></div></div>
         <div class="controls">
           <label><span>主队近期状态 <output id="homeFormOutput">7</output></span><input id="homeForm" type="range" min="1" max="10" value="7"></label>
           <label><span>客队近期状态 <output id="awayFormOutput">6</output></span><input id="awayForm" type="range" min="1" max="10" value="6"></label>
@@ -102,20 +62,9 @@
           <div class="crowd-controls"><span>大众热门比分</span><input id="crowdHome" type="number" min="0" max="9" value="1" aria-label="大众预测主队进球"><b>:</b><input id="crowdAway" type="number" min="0" max="9" value="1" aria-label="大众预测客队进球"></div>
           <label><span>热门比分降权 <output id="crowdPenaltyOutput">20%</output></span><input id="crowdPenalty" type="range" min="0" max="50" value="20"></label>
         </div>
-
         <button class="predict-button" id="predictButton"><span>再模拟 50,000 次</span><span class="arrow">↗</span></button>
       </div>
-
-      <article class="result-card" id="resultCard">
-        <div class="result-topline"><span>GOALMIND · <b id="predictionType">模型综合预测</b></span><span id="confidence">置信度 62%</span></div>
-        <div class="score"><strong id="homeScore">2</strong><span>:</span><strong id="awayScore">1</strong></div>
-        <div class="probabilities"><div><span>主胜</span><strong id="homeWin">54%</strong></div><div><span>平局</span><strong id="draw">25%</strong></div><div><span>客胜</span><strong id="awayWin">21%</strong></div></div>
-        <div class="strategy-recommendations"><div><span>胜平负推荐</span><strong id="wdlPick">-</strong><small id="wdlPickNote">胜平负未开</small></div><div><span>让球推荐</span><strong id="handicapPick">-</strong><small id="handicapPickNote">等待模型计算</small></div></div>
-        <p class="reason" id="reason"></p>
-        <div class="simulation-summary"><div class="simulation-label"><span>高频比分 TOP 4</span><strong id="simulationCount">50,000 次模拟</strong></div><div class="top-scores" id="topScores"></div></div>
-        <div class="total-goals-summary"><span>总进球数参考</span><div class="top-totals" id="topTotals"></div></div>
-        <div class="goal-expectancy"><span>预期进球</span><div class="xg-track"><i id="homeXgBar"></i><i id="awayXgBar"></i></div><strong id="xgText">1.68 — 0.94</strong></div>
-      </article>
+      <article class="result-card" id="resultCard"><div class="result-topline"><span>GOALMIND · <b id="predictionType">模型综合预测</b></span><span id="confidence">置信度 62%</span></div><div class="score"><strong id="homeScore">2</strong><span>:</span><strong id="awayScore">1</strong></div><div class="probabilities"><div><span>主胜</span><strong id="homeWin">54%</strong></div><div><span>平局</span><strong id="draw">25%</strong></div><div><span>客胜</span><strong id="awayWin">21%</strong></div></div><div class="strategy-recommendations"><div><span>胜平负推荐</span><strong id="wdlPick">-</strong><small id="wdlPickNote">胜平负未开</small></div><div><span>让球推荐</span><strong id="handicapPick">-</strong><small id="handicapPickNote">等待模型计算</small></div></div><p class="reason" id="reason"></p><div class="simulation-summary"><div class="simulation-label"><span>高频比分 TOP 4</span><strong id="simulationCount">50,000 次模拟</strong></div><div class="top-scores" id="topScores"></div></div><div class="total-goals-summary"><span>总进球数参考</span><div class="top-totals" id="topTotals"></div></div><div class="goal-expectancy"><span>预期进球</span><div class="xg-track"><i id="homeXgBar"></i><i id="awayXgBar"></i></div><strong id="xgText">1.68 — 0.94</strong></div></article>
     </section>
 
     <section class="market-lab"><div class="market-intro"><p class="eyebrow">MODEL VS MARKET</p><h2>模型与市场，<br>分歧在哪里？</h2><p>输入十进制赔率，系统先去除市场水位，再与双变量泊松 + Dixon–Coles + 蒙特卡洛概率比较。今日三场已完成赛程顺序核验；完整同源 1X2 未可复访前继续显示“-”。</p></div><div class="odds-panel"><div class="odds-title"><strong>1X2 欧赔</strong><span id="marketMargin">市场水位 —</span></div><div class="odds-inputs"><label>主胜<input id="oddsHome" type="number" min="1.01" step="0.01" value="1.70"></label><label>平局<input id="oddsDraw" type="number" min="1.01" step="0.01" value="3.69"></label><label>客胜<input id="oddsAway" type="number" min="1.01" step="0.01" value="5.23"></label></div><div class="market-table"><div class="market-head"><span>结果</span><span>模型</span><span>市场</span><span>偏差</span><span>Kelly*</span></div><div id="marketRows"></div></div><small class="market-note">* Kelly 仅作理论排序指标，不构成投注建议；本地快照缺少可公开复访 URL 时，只作为待复核当前快照。</small></div><div class="research-status"><div class="ready"><span>01</span><strong>双变量泊松相关性</strong><small>已启用</small></div><div class="ready"><span>02</span><strong>Dixon–Coles 低比分修正</strong><small>已增强</small></div><div class="ready"><span>03</span><strong>贝叶斯实力收缩</strong><small>已启用</small></div><div class="ready"><span>04</span><strong>赛制分层抽样</strong><small>已启用</small></div><div><span>05</span><strong>Isotonic / RPS / CLV 回测</strong><small>待完整历史数据</small></div></div><p class="data-caveat">校准口径：巴西–日本、德国–巴拉圭、荷兰–摩洛哥已回灌真实赛果。两场点球晋级提示淘汰赛90分钟平局与点球随机性要更保守处理，因此已轻微上调低比分平局权重，并收缩点球阶段强队优势。</p><p class="data-caveat">盘口口径：6月30日巡检只找到部分可复核赔率/晋级口径，尚不足以形成完整同源 1X2；页面保留部分盘口参考，但胜平负市场未开时显示“-”。</p><p class="data-caveat">协变量层：气候与场地、裁判点球/红牌倾向、休息天数差现在已经预留入口。当前没有完整可审计裁判样本，裁判项不入模；天气只作为轻量场地惩罚。</p><p class="data-caveat">教练组统计口径：现任教练在本届周期的正式比赛；东道主从现任教练上任后的正式赛事起算；点球大战按平局。当前缺少官方逐场流水，首版整理值暂不影响强度参数。</p><p class="data-caveat">社媒层只做反共识压力测试：必须保留公开视频链接、发布时间、博主与明确比分。当前没有可审计样本，默认关闭，不参与今日推荐。</p></section>
