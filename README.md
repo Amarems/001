@@ -10,6 +10,7 @@ GOALMIND 是一个静态网页版世界杯比分预测实验项目。
 - 小组赛 / 淘汰赛分层模拟
 - 胜平负、让球、比分、总进球推荐
 - 赛制背景、淘汰赛路径、气候、休息天数和裁判尺度协变量
+- Dixon-Coles 滚动回测、EV/Kelly/CLV/ROI/最大回撤评估
 
 ## 当前更新规则
 
@@ -17,11 +18,20 @@ GOALMIND 是一个静态网页版世界杯比分预测实验项目。
 
 - 每 3 小时检查一次新赛程、已结束赛果、赔率和盘口变化。
 - 只要新比赛赔率出现，就更新网页预测，不等待美国时间固定早上更新。
-- 每次默认更新未来最值得关注的 3 场比赛，可以跨不同比赛日期。
-- 进入 8 强阶段后，自动改为每次更新未来最值得关注的 2 场比赛。
 - 如果赔率变化超过 5%、去水隐含概率变化超过 2 个百分点、市场方向反转，或模型与市场分歧扩大，会重新生成预测。
 - 页面不再提供手动策略开关；赛制和淘汰赛路径只作为模型背景变量。
-- GitHub 连接可用时同步到 Pages；连接不可用时使用分享包手动上传。
+
+## Dixon-Coles 回测
+
+页面底部的 `ROLLING BACKTEST` 面板可以导入历史赛果 + 历史赔率 CSV。字段模板见 `backtest-template.csv`。
+
+回测规则：
+
+- 预测某一天时，只使用这一天以前的比赛训练模型，避免未来数据泄漏。
+- 模型概率会转换为公允赔率，再与市场赔率计算 EV。
+- 默认只选择每场 EV 最高的一项，避免同场多边下注虚高收益。
+- 支持固定均注、Kelly、半 Kelly。
+- 输出 ROI、CLV 胜率、平均 CLV、最大回撤、Sharpe、LogLoss、RPS。
 
 ## 本地打开
 
@@ -29,19 +39,19 @@ GOALMIND 是一个静态网页版世界杯比分预测实验项目。
 
 ## 发布到 GitHub Pages
 
-1. 上传这些文件到仓库根目录：
-   - `index.html`
-   - `styles.css`
-   - `app.js`
-   - `calibration-results.json`
-   - `coach-data.csv`
-   - `social-predictions.csv`
-   - `.nojekyll`
-   - `README.md`
-2. 打开仓库 Settings → Pages。
-3. Source 选择 `Deploy from a branch`。
-4. Branch 选择 `main`，目录选择 `/root`。
-5. 保存后等待 1-3 分钟。
+上传这些文件到仓库根目录：
+
+- `index.html`
+- `styles.css`
+- `app.js`
+- `backtest-engine.js`
+- `backtest-ui.js`
+- `backtest-template.csv`
+- `calibration-results.json`
+- `coach-data.csv`
+- `social-predictions.csv`
+- `.nojekyll`
+- `README.md`
 
 公开地址：
 
