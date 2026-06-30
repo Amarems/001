@@ -1,1 +1,136 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><meta name="description" content="2026 世界杯比分预测 Agent"/><title>GOALMIND · 世界杯比分预测</title><link rel="stylesheet" href="styles.css?v=20260630-title2"/><style>.lab-heading h2{font:900 clamp(24px,3vw,38px)/1.05 "Noto Sans SC",sans-serif!important;letter-spacing:-.02em!important;white-space:nowrap!important;word-break:keep-all!important;overflow-wrap:normal!important}.backtest-lab{padding:90px 7vw;background:#e3e0d6;color:#10100f}.backtest-panel{padding:26px;background:#f0eee8;border:1px solid #10100f;box-shadow:10px 10px 0 #10100f}.backtest-controls{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;align-items:end}.backtest-controls label{display:grid;gap:6px;font-size:9px;font-weight:800}.backtest-controls input,.backtest-controls select{min-height:44px;padding:10px;border:1px solid #10100f;background:#fffdf5;font:700 13px monospace}.backtest-status{margin:22px 0;color:#5f5c55;font-size:12px;line-height:1.7}.backtest-metrics{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid #10100f;border-left:1px solid #10100f}.backtest-metric{min-height:78px;padding:12px;display:grid;align-content:space-between;border-right:1px solid #10100f;border-bottom:1px solid #10100f}.backtest-metric span{color:#77756e;font-size:9px;font-weight:800}.backtest-metric strong{font:800 18px monospace}.positive{color:#b32f19}.negative{color:#596238}.backtest-table-wrap{margin-top:20px;overflow-x:auto}.backtest-table{width:100%;min-width:820px;border-collapse:collapse;font:700 10px/1.35 monospace}.backtest-table th,.backtest-table td{padding:10px 8px;border:1px solid #10100f;text-align:right}.backtest-table th:nth-child(-n+3),.backtest-table td:nth-child(-n+3){text-align:left}.csv-details{margin-top:18px;color:#5f5c55;font-size:11px}.csv-details pre{max-height:160px;overflow:auto;padding:14px;color:#f0eee8;background:#10100f}@media(max-width:780px){.backtest-controls,.backtest-metrics{grid-template-columns:1fr 1fr}}@media(max-width:560px){.backtest-controls,.backtest-metrics{grid-template-columns:1fr}}</style></head><body><div class="noise"></div><header class="topbar"><a class="brand" href="#"><span class="brand-mark">G</span><span>GOALMIND</span></a><div class="live-pill"><span></span> 2026 WORLD CUP</div><button class="about-button" id="aboutButton">模型说明</button></header><main><section class="hero"><div><p class="eyebrow">MATCHDAY CHECK · 30 JUN 2026</p><h1>今天，<br><em>球会怎么踢？</em></h1><p class="hero-copy">已加入 Dixon–Coles 滚动回测框架：用历史赛果和历史赔率寻找 EV、CLV 与真实回撤，而不是只看单场猜中。</p></div><div class="hero-orbit"><div class="ball">⚽</div><div class="orbit-label label-1">90 MIN</div><div class="orbit-label label-2">EV</div><div class="orbit-label label-3">CLV</div></div></section><section class="matchday"><div class="section-heading"><div><p class="eyebrow">TODAY'S FIXTURES</p><h2>今日待赛 / 已校准</h2></div><p class="timezone">赔率驱动更新<br>回测模块已接入</p></div><div class="match-grid" id="matchGrid"></div></section><section class="lab" id="lab"><div class="lab-heading"><p class="eyebrow">PREDICTION LAB</p><h2>盘口 + 模型</h2></div><div class="lab-panel"><div class="selected-match"><div class="team-side"><span class="flag" id="homeFlag">🇧🇷</span><strong id="homeName">巴西</strong></div><div class="versus">VS</div><div class="team-side away"><span class="flag" id="awayFlag">🇯🇵</span><strong id="awayName">日本</strong></div></div><div class="match-context"><div><span id="homeRank">世界 #5</span><strong id="homeSituation">已完赛校准</strong></div><div><span id="awayRank">世界 #17</span><strong id="awaySituation">已完赛校准</strong></div><p id="pathText">等待模型加载。</p><p class="bracket-path" id="bracketText">先看90分钟，再看点球子模拟。</p></div><div class="coach-context"><div><span>主队教练组</span><strong id="homeCoach">-</strong><small id="homeCoachRecord">-</small><em id="homeCoachRate">暂不入模</em></div><div><span>客队教练组</span><strong id="awayCoach">-</strong><small id="awayCoachRecord">-</small><em id="awayCoachRate">暂不入模</em></div></div><div class="controls"><label><span>主队近期状态 <output id="homeFormOutput">8</output></span><input id="homeForm" type="range" min="1" max="10" value="8"></label><label><span>客队近期状态 <output id="awayFormOutput">7</output></span><input id="awayForm" type="range" min="1" max="10" value="7"></label><label><span>比赛开放程度 <output id="tempoOutput">5</output></span><input id="tempo" type="range" min="1" max="10" value="5"></label><label><span>Dixon–Coles ρ <output id="rhoOutput">-0.08</output></span><input id="rho" type="range" min="-15" max="5" value="-8"></label><label class="strategy-switch"><span><strong>反共识压力测试</strong><small>仅在有可审计社媒样本时开启</small></span><input id="crowdMode" type="checkbox"><i></i></label><div class="crowd-controls"><span>大众热门比分</span><input id="crowdHome" type="number" min="0" max="9" value="1"><b>:</b><input id="crowdAway" type="number" min="0" max="9" value="1"></div><label><span>热门比分降权 <output id="crowdPenaltyOutput">20%</output></span><input id="crowdPenalty" type="range" min="0" max="50" value="20"></label></div><button class="predict-button" id="predictButton"><span>再模拟 50,000 次</span><span class="arrow">↗</span></button></div><article class="result-card" id="resultCard"><div class="result-topline"><span>GOALMIND · <b id="predictionType">模型综合预测</b></span><span id="confidence">置信度 —</span></div><div class="score"><strong id="homeScore">-</strong><span>:</span><strong id="awayScore">-</strong></div><div class="probabilities"><div><span>主胜</span><strong id="homeWin">—</strong></div><div><span>平局</span><strong id="draw">—</strong></div><div><span>客胜</span><strong id="awayWin">—</strong></div></div><div class="strategy-recommendations"><div><span>胜平负推荐</span><strong id="wdlPick">-</strong><small id="wdlPickNote">等待计算</small></div><div><span>让球推荐</span><strong id="handicapPick">-</strong><small id="handicapPickNote">等待计算</small></div></div><p class="reason" id="reason"></p><div class="simulation-summary"><div class="simulation-label"><span>高频比分 TOP 4</span><strong id="simulationCount">50,000 次模拟</strong></div><div class="top-scores" id="topScores"></div></div><div class="total-goals-summary"><span>总进球数参考</span><div class="top-totals" id="topTotals"></div></div><div class="goal-expectancy"><span>预期进球</span><div class="xg-track"><i id="homeXgBar"></i><i id="awayXgBar"></i></div><strong id="xgText">—</strong></div></article></section><section class="market-lab"><div class="market-intro"><p class="eyebrow">MODEL VS MARKET</p><h2>模型与市场，<br>分歧在哪里？</h2><p>输入十进制赔率，系统先去除市场水位，再与模型概率比较。</p></div><div class="odds-panel"><div class="odds-title"><strong>1X2 欧赔</strong><span id="marketMargin">市场水位 —</span></div><div class="odds-inputs"><label>主胜<input id="oddsHome" type="number" min="1.01" step="0.01" value="1.70"></label><label>平局<input id="oddsDraw" type="number" min="1.01" step="0.01" value="3.69"></label><label>客胜<input id="oddsAway" type="number" min="1.01" step="0.01" value="5.23"></label></div><div class="market-table"><div class="market-head"><span>结果</span><span>模型</span><span>市场</span><span>偏差</span><span>Kelly*</span></div><div id="marketRows"></div></div><small class="market-note">Kelly 仅作理论排序指标，不构成投注建议。</small></div><div class="research-status"><div class="ready"><span>01</span><strong>Dixon–Coles</strong><small>已启用</small></div><div class="ready"><span>02</span><strong>EV</strong><small>已接入</small></div><div class="ready"><span>03</span><strong>CLV</strong><small>已接入</small></div><div class="ready"><span>04</span><strong>滚动回测</strong><small>已接入</small></div></div><p class="data-caveat">页面仅用于数据科学练习，不构成投注建议。</p></section><section class="backtest-lab"><div class="market-intro"><p class="eyebrow">ROLLING BACKTEST</p><h2>Dixon–Coles<br>正期望回测</h2><p>导入历史赛果 + 历史赔率 CSV 后，系统会按日期滚动训练。预测某一天时，只允许使用这一天以前的数据。</p></div><div class="backtest-panel"><div class="backtest-controls"><label><span>历史 CSV</span><input id="backtestFile" type="file" accept=".csv,text/csv"></label><label><span>最小训练场次</span><input id="minTrainingMatches" type="number" min="20" step="10" value="160"></label><label><span>EV 触发阈值 %</span><input id="evThreshold" type="number" min="0" max="30" step="0.5" value="5"></label><label><span>初始资金</span><input id="initialBankroll" type="number" min="100" step="100" value="10000"></label><label><span>下注方式</span><select id="stakeMode"><option value="halfKelly">半 Kelly</option><option value="flat">固定均注</option><option value="kelly">Kelly</option></select></label><label><span>入场赔率</span><select id="oddsTiming"><option value="open">初盘 / 早盘</option><option value="close">终盘</option></select></label><button class="predict-button" id="runBacktestButton"><span>运行回测</span><span class="arrow">↗</span></button></div><p class="backtest-status" id="backtestStatus">等待导入历史 CSV。我们不会用样例数据伪造收益率；样例只展示字段格式。</p><div class="backtest-metrics" id="backtestMetrics"></div><div class="backtest-table-wrap"><table class="backtest-table"><thead><tr><th>日期</th><th>比赛</th><th>选择</th><th>模型概率</th><th>赔率</th><th>EV</th><th>下注</th><th>盈亏</th><th>CLV</th></tr></thead><tbody id="backtestBets"><tr><td colspan="9">导入数据后显示最近触发的虚拟下注。</td></tr></tbody></table></div><details class="csv-details"><summary>CSV 字段格式</summary><pre id="csvSchema"></pre></details></div><p class="data-caveat">回测防线：训练集必须严格早于预测日；终盘赔率只用于 CLV 或终盘策略对照；默认每场只选 EV 最高的一项，避免同场多边下注把收益虚高。</p></section></main><dialog id="aboutDialog"><button class="dialog-close" id="closeDialog">×</button><p class="eyebrow">HOW IT WORKS</p><h2>模型怎么算？</h2><p>双变量泊松、Dixon–Coles、贝叶斯收缩、盘口去水概率比较与滚动回测。</p></dialog><footer><span>GOALMIND / 2026</span><span>数据模型演示 · 非投注建议</span></footer><script src="backtest-engine.js?v=20260630-ev1"></script><script src="app.js?v=20260630-0940"></script><script src="backtest-ui.js?v=20260630-ev1"></script></body></html>
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="2026 世界杯比分预测 Agent" />
+  <title>GOALMIND · 世界杯比分预测</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Noto+Sans+SC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20260630-title2" />
+</head>
+<body>
+  <div class="noise"></div>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="GOALMIND 首页">
+      <span class="brand-mark">G</span>
+      <span>GOALMIND</span>
+    </a>
+    <div class="live-pill"><span></span> 2026 WORLD CUP</div>
+    <button class="about-button" id="aboutButton">模型说明</button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">MATCHDAY CHECK · 30 JUN 2026</p>
+        <h1>今天，<br><em>球会怎么踢？</em></h1>
+        <p class="hero-copy">从实力、攻防、赛制路径、盘口变化与真实赛果回灌出发，计算每一种可能的比分。不是玄学，是一张概率地图。</p>
+      </div>
+      <div class="hero-orbit" aria-hidden="true">
+        <div class="ball">⚽</div>
+        <div class="orbit-label label-1">90 MIN</div>
+        <div class="orbit-label label-2">21 × 11</div>
+        <div class="orbit-label label-3">1 RESULT</div>
+      </div>
+    </section>
+
+    <section class="matchday">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">TODAY'S FIXTURES</p>
+          <h2>今日待赛 3 场 · 已校准 3 场</h2>
+        </div>
+        <p class="timezone">更新口径：美国东部 2026-06-30 待赛核验<br>亚洲时间 2026-06-30 盘口巡检</p>
+      </div>
+      <div class="match-grid" id="matchGrid"></div>
+    </section>
+
+    <section class="lab" id="lab">
+      <div class="lab-heading">
+        <p class="eyebrow">PREDICTION LAB</p>
+        <h2>盘口 + 模型</h2>
+      </div>
+
+      <div class="lab-panel">
+        <div class="selected-match">
+          <div class="team-side">
+            <span class="flag" id="homeFlag">🇧🇷</span>
+            <strong id="homeName">巴西</strong>
+          </div>
+          <div class="versus">VS</div>
+          <div class="team-side away">
+            <span class="flag" id="awayFlag">🇯🇵</span>
+            <strong id="awayName">日本</strong>
+          </div>
+        </div>
+
+        <div class="match-context">
+          <div>
+            <span id="homeRank">世界 #5</span>
+            <strong id="homeSituation">淘汰赛 · 个人能力优势明显，但中立场不额外加主场权重</strong>
+          </div>
+          <div>
+            <span id="awayRank">世界 #17</span>
+            <strong id="awaySituation">淘汰赛 · 高纪律性阵型，优先控制转换风险</strong>
+          </div>
+          <p id="pathText">巴西–日本已完赛回灌：巴西2–1日本。中立场不默认给列表第一队主场加成，赛前盘口继续保留用于校准。</p>
+          <p class="bracket-path" id="bracketText">32强淘汰赛：先模拟90分钟，若平局再触发点球大战子模拟。</p>
+        </div>
+        <div class="coach-context">
+          <div>
+            <span>主队教练组</span>
+            <strong id="homeCoach">巴西教练组</strong>
+            <small id="homeCoachRecord">待逐场复核</small>
+            <em id="homeCoachRate">未核验，暂不入模</em>
+          </div>
+          <div>
+            <span>客队教练组</span>
+            <strong id="awayCoach">森保一</strong>
+            <small id="awayCoachRecord">待逐场复核</small>
+            <em id="awayCoachRate">未核验，暂不入模</em>
+          </div>
+        </div>
+
+        <div class="controls">
+          <label><span>主队近期状态 <output id="homeFormOutput">7</output></span><input id="homeForm" type="range" min="1" max="10" value="7"></label>
+          <label><span>客队近期状态 <output id="awayFormOutput">6</output></span><input id="awayForm" type="range" min="1" max="10" value="6"></label>
+          <label><span>比赛开放程度 <output id="tempoOutput">5</output></span><input id="tempo" type="range" min="1" max="10" value="5"></label>
+          <label><span>Dixon–Coles ρ <output id="rhoOutput">-0.08</output></span><input id="rho" type="range" min="-15" max="5" value="-8"></label>
+          <label class="strategy-switch"><span><strong>反共识压力测试</strong><small>仅在有可审计社媒样本时开启</small></span><input id="crowdMode" type="checkbox"><i></i></label>
+          <div class="crowd-controls"><span>大众热门比分</span><input id="crowdHome" type="number" min="0" max="9" value="1" aria-label="大众预测主队进球"><b>:</b><input id="crowdAway" type="number" min="0" max="9" value="1" aria-label="大众预测客队进球"></div>
+          <label><span>热门比分降权 <output id="crowdPenaltyOutput">20%</output></span><input id="crowdPenalty" type="range" min="0" max="50" value="20"></label>
+        </div>
+
+        <button class="predict-button" id="predictButton"><span>再模拟 50,000 次</span><span class="arrow">↗</span></button>
+      </div>
+
+      <article class="result-card" id="resultCard">
+        <div class="result-topline"><span>GOALMIND · <b id="predictionType">模型综合预测</b></span><span id="confidence">置信度 62%</span></div>
+        <div class="score"><strong id="homeScore">2</strong><span>:</span><strong id="awayScore">1</strong></div>
+        <div class="probabilities"><div><span>主胜</span><strong id="homeWin">54%</strong></div><div><span>平局</span><strong id="draw">25%</strong></div><div><span>客胜</span><strong id="awayWin">21%</strong></div></div>
+        <div class="strategy-recommendations"><div><span>胜平负推荐</span><strong id="wdlPick">-</strong><small id="wdlPickNote">胜平负未开</small></div><div><span>让球推荐</span><strong id="handicapPick">-</strong><small id="handicapPickNote">等待模型计算</small></div></div>
+        <p class="reason" id="reason"></p>
+        <div class="simulation-summary"><div class="simulation-label"><span>高频比分 TOP 4</span><strong id="simulationCount">50,000 次模拟</strong></div><div class="top-scores" id="topScores"></div></div>
+        <div class="total-goals-summary"><span>总进球数参考</span><div class="top-totals" id="topTotals"></div></div>
+        <div class="goal-expectancy"><span>预期进球</span><div class="xg-track"><i id="homeXgBar"></i><i id="awayXgBar"></i></div><strong id="xgText">1.68 — 0.94</strong></div>
+      </article>
+    </section>
+
+    <section class="market-lab"><div class="market-intro"><p class="eyebrow">MODEL VS MARKET</p><h2>模型与市场，<br>分歧在哪里？</h2><p>输入十进制赔率，系统先去除市场水位，再与双变量泊松 + Dixon–Coles + 蒙特卡洛概率比较。今日三场已完成赛程顺序核验；完整同源 1X2 未可复访前继续显示“-”。</p></div><div class="odds-panel"><div class="odds-title"><strong>1X2 欧赔</strong><span id="marketMargin">市场水位 —</span></div><div class="odds-inputs"><label>主胜<input id="oddsHome" type="number" min="1.01" step="0.01" value="1.70"></label><label>平局<input id="oddsDraw" type="number" min="1.01" step="0.01" value="3.69"></label><label>客胜<input id="oddsAway" type="number" min="1.01" step="0.01" value="5.23"></label></div><div class="market-table"><div class="market-head"><span>结果</span><span>模型</span><span>市场</span><span>偏差</span><span>Kelly*</span></div><div id="marketRows"></div></div><small class="market-note">* Kelly 仅作理论排序指标，不构成投注建议；本地快照缺少可公开复访 URL 时，只作为待复核当前快照。</small></div><div class="research-status"><div class="ready"><span>01</span><strong>双变量泊松相关性</strong><small>已启用</small></div><div class="ready"><span>02</span><strong>Dixon–Coles 低比分修正</strong><small>已增强</small></div><div class="ready"><span>03</span><strong>贝叶斯实力收缩</strong><small>已启用</small></div><div class="ready"><span>04</span><strong>赛制分层抽样</strong><small>已启用</small></div><div><span>05</span><strong>Isotonic / RPS / CLV 回测</strong><small>待完整历史数据</small></div></div><p class="data-caveat">校准口径：巴西–日本、德国–巴拉圭、荷兰–摩洛哥已回灌真实赛果。两场点球晋级提示淘汰赛90分钟平局与点球随机性要更保守处理，因此已轻微上调低比分平局权重，并收缩点球阶段强队优势。</p><p class="data-caveat">盘口口径：6月30日巡检只找到部分可复核赔率/晋级口径，尚不足以形成完整同源 1X2；页面保留部分盘口参考，但胜平负市场未开时显示“-”。</p><p class="data-caveat">协变量层：气候与场地、裁判点球/红牌倾向、休息天数差现在已经预留入口。当前没有完整可审计裁判样本，裁判项不入模；天气只作为轻量场地惩罚。</p><p class="data-caveat">教练组统计口径：现任教练在本届周期的正式比赛；东道主从现任教练上任后的正式赛事起算；点球大战按平局。当前缺少官方逐场流水，首版整理值暂不影响强度参数。</p><p class="data-caveat">社媒层只做反共识压力测试：必须保留公开视频链接、发布时间、博主与明确比分。当前没有可审计样本，默认关闭，不参与今日推荐。</p></section>
+
+    <section class="backtest-lab"><div class="market-intro"><p class="eyebrow">ROLLING BACKTEST</p><h2>Dixon–Coles<br>正期望回测</h2><p>导入历史赛果 + 历史赔率 CSV 后，系统会按日期滚动训练：预测某一天时，只允许使用这一天以前的数据。它会把模型概率换成公允赔率，再与市场赔率比较，筛出 EV &gt; 阈值的虚拟下注。</p></div><div class="backtest-panel"><div class="backtest-controls"><label><span>历史 CSV</span><input id="backtestFile" type="file" accept=".csv,text/csv"></label><label><span>最小训练场次</span><input id="minTrainingMatches" type="number" min="20" step="10" value="160"></label><label><span>EV 触发阈值 %</span><input id="evThreshold" type="number" min="0" max="30" step="0.5" value="5"></label><label><span>初始资金</span><input id="initialBankroll" type="number" min="100" step="100" value="10000"></label><label><span>下注方式</span><select id="stakeMode"><option value="halfKelly">半 Kelly</option><option value="flat">固定均注</option><option value="kelly">Kelly</option></select></label><label><span>入场赔率</span><select id="oddsTiming"><option value="open">初盘 / 早盘</option><option value="close">终盘</option></select></label><label><span>训练信号</span><select id="signalMode"><option value="ensemble">双轨融合</option><option value="hybrid">进球 + xG 混合</option><option value="xg">npxG / xG 替代</option><option value="goals">真实进球</option></select></label><label><span>xG 权重 %</span><input id="xgWeight" type="number" min="0" max="100" step="5" value="72"></label><label><span>融合 γ：进球模型 %</span><input id="ensembleGamma" type="number" min="0" max="100" step="5" value="45"></label><button class="predict-button" id="runBacktestButton"><span>运行回测</span><span class="arrow">↗</span></button></div><p class="backtest-status" id="backtestStatus">等待导入历史 CSV。我们不会用样例数据伪造收益率；样例只展示字段格式。</p><div class="backtest-metrics" id="backtestMetrics"></div><div class="backtest-table-wrap"><table class="backtest-table"><thead><tr><th>日期</th><th>比赛</th><th>选择</th><th>模型概率</th><th>赔率</th><th>EV</th><th>下注</th><th>盈亏</th><th>CLV</th></tr></thead><tbody id="backtestBets"><tr><td colspan="9">导入数据后显示最近触发的虚拟下注。</td></tr></tbody></table></div><details class="csv-details"><summary>CSV 字段格式</summary><pre id="csvSchema"></pre></details></div><p class="data-caveat">xG 口径：优先使用非点球 xG 字段 home_npxg / away_npxg；如果没有，则使用 home_xg / away_xg。选择 xG、混合或双轨融合时，缺少 xG 字段会直接报错，不会自动退回真实进球。</p><p class="data-caveat">回测防线：训练集必须严格早于预测日；终盘赔率只用于 CLV 或终盘策略对照；默认每场只选 EV 最高的一项，避免同一场多边下注把收益虚高。</p></section>
+  </main>
+
+  <dialog id="aboutDialog"><button class="dialog-close" id="closeDialog" aria-label="关闭">×</button><p class="eyebrow">HOW IT WORKS</p><h2>模型怎么算？</h2><p>GOALMIND 当前采用双变量泊松分布：两队进球不再完全独立，而是共享一个比赛级相关冲击，用来描述开放回合、红牌、节奏突然变化等共同影响。</p><p>Dixon–Coles ρ 会继续修正 0:0、1:0、0:1、1:1 四种低比分；对卡位战、淘汰赛这类焦灼场景，0:0 与 1:1 会得到额外平局权重。</p><p>球队攻防参数加入贝叶斯收缩：先假设真实实力围绕全局均值波动，再根据样本量、近期状态、排名近似 ELO 把观察值向均值拉回，避免一两场比赛把弱队或强队过度放大。</p><p>小组赛和淘汰赛会分层运行。小组赛关注积分、净胜球需求和轮换；淘汰赛先模拟90分钟，若平局再触发点球大战子模拟。</p><p>气候与场地、裁判尺度、休息天数差已经作为协变量入口。当前为轻量默认值；完整历史数据、实时天气和裁判样本接入后，才会进入严格回测。</p><p>它适合辅助研究，不是投注建议。足球最迷人的地方，恰恰是模型永远无法消灭意外。</p></dialog>
+
+  <dialog id="simulationDoneDialog" class="status-dialog"><p class="eyebrow">SIMULATION COMPLETE</p><h2>已完成<br>50,000 次模拟</h2><p>新的比分概率、胜平负、让球和总进球参考已经更新完成。</p><button class="dialog-action" id="simulationDoneButton">确定</button></dialog>
+
+  <footer><span>GOALMIND / 2026</span><span>数据模型演示 · 非投注建议</span></footer>
+
+  <script src="backtest-engine.js?v=20260630-xg1"></script>
+  <script src="app.js?v=20260630-1403"></script>
+  <script src="backtest-ui.js?v=20260630-xg1"></script>
+</body>
+</html>
