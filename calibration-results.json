@@ -1,7 +1,7 @@
 {
-  "as_of": "2026-06-28T08:30:00-04:00",
-  "status": "knockout-matchday-ready",
-  "scope": "2026-06-27 completed World Cup group-stage matches used as a small-batch shrinkage calibration for the first knockout matchday",
+  "as_of": "2026-07-01T06:20:00-04:00",
+  "status": "knockout-matchday-odds-patrol",
+  "scope": "2026-06-27 group-stage batch plus 2026-06-28 through 2026-06-30 Round of 32 results used only for small-sample aggregate shrinkage",
   "method": "Bivariate Poisson + Dixon-Coles low-score correction + Bayesian shrinkage + knockout stratified Monte Carlo",
   "finalized_matches": [
     {
@@ -33,27 +33,69 @@
       "away": "Uzbekistan",
       "actual_score": "3:1",
       "lesson": "Must-win third-place scenarios remain vulnerable to late open-game scoring."
+    },
+    {
+      "home": "South Africa",
+      "away": "Canada",
+      "actual_score": "0:1",
+      "lesson": "First knockout match confirmed the low-event branch remains material; do not raise knockout tempo from a single favorite/underdog result."
+    },
+    {
+      "home": "Brazil",
+      "away": "Japan",
+      "actual_score": "2:1",
+      "lesson": "Favorite direction was valid, but exact-score tail should remain broad around 2:1 and 1:1 in knockout matches."
+    },
+    {
+      "home": "Germany",
+      "away": "Paraguay",
+      "actual_score": "1:1; Paraguay advanced 4:3 on penalties",
+      "lesson": "Strong market favorites can still be dragged into 90-minute draws; keep penalty-stage edge narrowly bounded."
+    },
+    {
+      "home": "Netherlands",
+      "away": "Morocco",
+      "actual_score": "1:1; Morocco advanced 3:2 on penalties",
+      "lesson": "Close knockout ties need persistent 1:1 mass and a conservative penalty submodel."
+    },
+    {
+      "home": "Mexico",
+      "away": "Ecuador",
+      "actual_score": "2:0",
+      "lesson": "A verified host home setting can matter, but one clean host win should only nudge aggregate goal scale and must not overwrite team priors."
+    },
+    {
+      "home": "Ivory Coast",
+      "away": "Norway",
+      "actual_score": "1:2",
+      "lesson": "Norway's 2-1 win supports a slightly higher aggregate goal scale and less automatic 0-0/1-1 mass when the model already sees a clear xG gap; keep the update small to avoid single-match overfit."
     }
   ],
   "online_calibration": {
     "applied": true,
-    "goal_scale_before": 1.018,
-    "goal_scale_after": 1.004,
-    "knockout_draw_boost_after": 0.18,
-    "previous_day_direction_note": "The model handled England and Argentina directionally, but Colombia-Portugal and Algeria-Austria reinforced the need for stronger low-score and chaotic-state branches. First knockout matchday uses a slightly lower aggregate goal scale and higher 90-minute draw handling.",
-    "minimum_batch": 5,
+    "goal_scale_before": 0.998,
+    "goal_scale_after": 1.003,
+    "knockout_draw_boost_after": 0.21,
+    "knockout_draw_damping": "When one side has a clear expected-goal edge, the extra 0-0/1-1 knockout draw uplift is damped by up to 45%.",
+    "previous_day_direction_note": "Norway beat Ivory Coast 2-1, which exposed that the previous knockout draw uplift could leave too much mass on 0-0/1-1 even when the model saw Norway as the stronger scoring side. The update slightly raises aggregate goal scale and adds mismatch-based draw damping while preserving conservative knockout behavior.",
+    "minimum_batch": 10,
     "overfit_guardrail": "No single completed match is allowed to move team attack/defense priors directly; updates are limited to aggregate goal scale, low-score draw handling, and volatility branch weights."
   },
   "today_matches": [
-    "South Africa vs Canada"
+    "England vs DR Congo",
+    "Belgium vs Senegal",
+    "United States vs Bosnia and Herzegovina"
   ],
   "source_audit": {
-    "official_schedule_basis": "Round of 32: Group A runner-up vs Group B runner-up, Los Angeles/SoFi, 2026-06-28 US local date.",
-    "project_same_source_odds_snapshot": "missing_for_today_match",
+    "official_schedule_basis": "Public Round of 32 schedule cross-check: 2026-07-01 slate is England-DR Congo, Belgium-Senegal, United States-Bosnia and Herzegovina. FIFA official schedule page remained difficult to extract in this run; SBNation/WAGNH schedule context and independent schedule/result pages agreed on order/time, with Mexico-Ecuador result pages confirming Mexico advanced 2-0.",
+    "project_same_source_odds_snapshot": "2026-07-01 patrol found preview, injury and partial betting snippets, but no complete reproducible same-source 90-minute 1X2 board for the three active fixtures; page keeps WDL markets closed for these fixtures.",
     "available_odds_snapshots": [
       "odds-snapshots/2026-06-25T091154+0800.json",
       "odds-snapshots/2026-06-25T110421+0800.json",
-      "odds-snapshots/2026-06-26T111816+0800.json"
+      "odds-snapshots/2026-06-26T111816+0800.json",
+      "odds-snapshots/2026-06-29T200403+0800.json",
+      "odds-snapshots/2026-06-30T140323+0800.json",
+      "odds-snapshots/2026-07-01T174500+0800.json"
     ],
     "injury_feed": "not_integrated_no_complete_official_matchday_list",
     "referee_sample": "not_integrated_missing_complete_verified_sample",
