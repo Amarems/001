@@ -187,7 +187,7 @@
       <div class="market-intro">
         <p class="eyebrow">MODEL VS MARKET</p>
         <h2>模型与市场，<br>分歧在哪里？</h2>
-        <p>输入十进制赔率，系统先去除市场水位，再与双变量泊松 + Dixon–Coles + 蒙特卡洛概率比较。6/30 美区夜场与 7/1–7/3 赛程已补入待核验池；完整同源 1X2 未可复访前继续显示“-”。</p>
+        <p>输入十进制赔率，系统先去除市场水位，再与双变量泊松 + Dixon–Coles + 蒙特卡洛概率比较。墨西哥–厄瓜多尔赛果已回灌；7/1 美区三场仍等待完整同源 1X2，未可复访前继续显示“-”。</p>
       </div>
       <div class="odds-panel">
         <div class="odds-title">
@@ -212,8 +212,8 @@
         <div class="ready"><span>04</span><strong>赛制分层抽样</strong><small>已启用</small></div>
         <div><span>05</span><strong>Isotonic / RPS / CLV 回测</strong><small>待完整历史数据</small></div>
       </div>
-      <p class="data-caveat">校准口径：巴西–日本、德国–巴拉圭、荷兰–摩洛哥已回灌真实赛果。两场点球晋级提示淘汰赛90分钟平局与点球随机性要更保守处理，因此已轻微上调低比分平局权重，并收缩点球阶段强队优势。</p>
-      <p class="data-caveat">盘口口径：6月30日巡检只找到部分可复核赔率/晋级口径，尚不足以形成完整同源 1X2；页面保留部分盘口参考，但胜平负市场未开时显示“-”。</p>
+      <p class="data-caveat">校准口径：巴西–日本、德国–巴拉圭、荷兰–摩洛哥、墨西哥–厄瓜多尔已回灌真实赛果。点球局提示淘汰赛90分钟平局与点球随机性要更保守处理；墨西哥2–0只轻微修正总进球尺度，避免单场过拟合。</p>
+      <p class="data-caveat">盘口口径：7月1日巡检只找到部分可复核赔率/晋级/赛前情报片段，尚不足以形成完整同源 1X2；页面保留部分盘口参考，但胜平负市场未开时显示“-”。</p>
       <p class="data-caveat">协变量层：气候与场地、裁判点球/红牌倾向、休息天数差现在已经预留入口。当前没有完整可审计裁判样本，裁判项不入模；天气只作为轻量场地惩罚。</p>
       <p class="data-caveat">教练组统计口径：现任教练在本届周期的正式比赛；东道主从现任教练上任后的正式赛事起算；点球大战按平局。当前缺少官方逐场流水，首版整理值暂不影响强度参数。</p>
       <p class="data-caveat">社媒层只做反共识压力测试：必须保留公开视频链接、发布时间、博主与明确比分。当前没有可审计样本，默认关闭，不参与今日推荐。</p>
@@ -331,6 +331,7 @@
 
   <script src="backtest-engine.js?v=20260630-xg1"></script>
   <script src="app.js?v=20260630-real-mc1"></script>
+  <script src="calibration-patch.js?v=20260701-norway1"></script>
   <script src="backtest-ui.js?v=20260630-xg1"></script>
 </body>
 </html>
