@@ -1,0 +1,22 @@
+{
+  "source": "Polymarket World Cup",
+  "url": "https://polymarket.com/zh/sports/world-cup",
+  "checkedAt": "2026-07-02",
+  "usage": "Prediction market liquidity layer. Blend normalized 1X2 prices with model output using a capped weight based on total market volume and 1X2 price concentration. Spread and total prices are stored as auxiliary market-pressure references.",
+  "limitations": [
+    "The readable page data provides total market volume plus 1X2, spread, and total prices; it does not provide true per-team trading flow.",
+    "Do not infer or fabricate side-specific traded volume from price buttons or total market volume alone.",
+    "This layer is capped at 5% and is lower priority than verified sportsbook odds."
+  ],
+  "markets": [
+    { "home": "西班牙", "away": "奥地利", "probabilities": [0.75, 0.18, 0.08], "volumeUsd": 3070000, "spread": { "line": -1.5, "favorite": "西班牙", "prices": [0.4925, 0.51] }, "total": { "line": 2.5, "prices": [0.555, 0.4475] } },
+    { "home": "葡萄牙", "away": "克罗地亚", "probabilities": [0.56, 0.27, 0.1875], "volumeUsd": 2450000, "spread": { "line": -1.5, "favorite": "葡萄牙", "prices": [0.3225, 0.68] }, "total": { "line": 2.5, "prices": [0.535, 0.4675] } },
+    { "home": "瑞士", "away": "阿尔及利亚", "probabilities": [0.4775, 0.30, 0.2325], "volumeUsd": 763390, "spread": { "line": -1.5, "favorite": "瑞士", "prices": [0.2275, 0.7775] }, "total": { "line": 2.5, "prices": [0.44, 0.565] } },
+    { "home": "澳大利亚", "away": "埃及", "probabilities": [0.29, 0.34, 0.39], "volumeUsd": 384170, "spread": { "line": 1.5, "favorite": "埃及", "prices": [0.85, 0.16] }, "total": { "line": 1.5, "prices": [0.62, 0.39] } },
+    { "home": "阿根廷", "away": "佛得角", "probabilities": [0.85, 0.12, 0.044], "volumeUsd": 2740000, "spread": { "line": -1.5, "favorite": "阿根廷", "prices": [0.62, 0.39] }, "total": { "line": 2.5, "prices": [0.59, 0.42] } },
+    { "home": "哥伦比亚", "away": "加纳", "probabilities": [0.65, 0.25, 0.13], "volumeUsd": 542720, "spread": { "line": -1.5, "favorite": "哥伦比亚", "prices": [0.38, 0.63] }, "total": { "line": 2.5, "prices": [0.42, 0.59] } },
+    { "home": "加拿大", "away": "摩洛哥", "probabilities": [0.19, 0.28, 0.55], "volumeUsd": 1100000, "spread": { "line": 1.5, "favorite": "摩洛哥", "prices": [0.74, 0.27] }, "total": { "line": 2.5, "prices": [0.42, 0.59] } },
+    { "home": "巴拉圭", "away": "法国", "probabilities": [0.05, 0.13, 0.84], "volumeUsd": 474190, "spread": { "line": 1.5, "favorite": "法国", "prices": [0.39, 0.62] }, "total": { "line": 2.5, "prices": [0.59, 0.42] } },
+    { "home": "巴西", "away": "挪威", "probabilities": [0.52, 0.27, 0.22], "volumeUsd": 432950, "spread": { "line": -1.5, "favorite": "巴西", "prices": [0.28, 0.73] }, "total": { "line": 2.5, "prices": [0.55, 0.46] } }
+  ]
+}
